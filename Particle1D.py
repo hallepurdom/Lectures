@@ -162,7 +162,13 @@ class Pendulum(Particle):
     
     def F(self, x, v, t):
         g = 9.8 
-
+        
+        #HP: driving force * cos (driving frequency * t) - viscous damping * v - g / length * sin (x)
+        #HP: Damped pendulum eqn: theta_.. =  - alpha*theta_. - g/L*sin(theta)
+        #HP: theta_.. = -g/Rsin(theta) + (-b*theta_. + A*cos(kT)) / mR^2
+        
+        #HP: damping coefficient = self.nu 
+        
         F = self.Fd*np.cos(self.omega_d*t) - self.nu*v - g/self.l*np.sin(x)
         
         return F
